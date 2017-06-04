@@ -1,16 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" type="text/css" href="styles/normalize.css">
+	<link rel="stylesheet" type="text/css" href="styles/style.css">
 	<title>API: timestamp microservice</title>
 </head>
 <body>
-<h1>API: timestamp microservice</h1>
- <blockquote>
-                User stories:
-                <ul>1) I can pass a string as a parameter, and it will check to see whether that string 
-                contains either a unix timestamp or a natural language date (example: January 1, 2016)</ul>
-                <ul>2) If it does, it returns both the Unix timestamp and the natural language form of that date.</ul>
-                <ul>3) If it does not contain a date or Unix timestamp, it returns null for those properties.</ul>
-            </blockquote>
+
+<article>
+   <header>
+    <h1>API Basejump: Timestamp microservice</h1>
+  </header>
+  <section>
+ 	 <header>
+	  <h3>This microservice implements next user stories:</h3>	
+	</header>
+  	
+  	<ul>
+        <li>I can pass a string as a parameter, and it will check to see whether that string 
+        contains either a unix timestamp or a natural language date (example: January 1, 2019)</li>
+        <li>If it does, it returns both the Unix timestamp and the natural language form of that date.</li>
+        <li>If it does not contain a date or Unix timestamp, it returns null for those properties.</li>
+     <ul>
+	
+  </section>
+<section>
+	<header>
+		<h3>Example usage</h3>
+
+	</header>
+
+		<ul>
+			<li><code>https://tranquil-coast-90658.herokuapp.com/2019-01-01</code></li>
+			<li><code>https://tranquil-coast-90658.herokuapp.com/1546300800</code></li>
+			<li><code>https://tranquil-coast-90658.herokuapp.com/January%201,%202019</code></li>
+		</ul>
+		<h3>Output</h3>
+		<ul>
+		<li>
+		<code>
+				
+		{
+			"unix":1546300800,
+			"natural":"January 1, 2019"
+		}
+		</code>
+		</li>
+		</ul>
+
+		
+	</code>
+</section>
+
+
+<footer>
+	<a href="https://github.com/Bael/fcc.backend.timestamp">Source code</a>
+</footer>
+ 
+</article>
+
 </body>
 </html>

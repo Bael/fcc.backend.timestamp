@@ -8,9 +8,6 @@ const server = http.createServer(function(req, res) {
 	
 	var url_parts = url.parse(req.url, true);
 	var query = url_parts.query;
-
-	
-
 	let path = url_parts.path.substr(1) || "";
 
 	if (path === "") {
@@ -18,7 +15,6 @@ const server = http.createServer(function(req, res) {
 		fs.readFile(__dirname + '/help.html', 
 				function(err, data) { 
 					if (err) {
-
 						res.statusCode = 500;
 						res.end(String(err));
 					} else {
@@ -27,9 +23,6 @@ const server = http.createServer(function(req, res) {
 						res.write(data);
 						res.end();
 					}});
-
-		
-		
 	}
 	else {
 		res.writeHead(200, { 'Content-Type': 'text/plain' });

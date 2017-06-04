@@ -27,6 +27,6 @@
     "mocha": "^3.4.2"
   },
   "dependencies": {
-    "moment": "^2.18.1"
+    
   }
 }
