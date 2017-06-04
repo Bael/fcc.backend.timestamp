@@ -4,8 +4,13 @@
   "description": "return timestamp",
   "main": "index.js",
   "scripts": {
-    "run" : "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "test": "mocha **/*.test.js",
+    "test-watch": "nodemon --exec 'npm test'",
+    "lint" : "jshint **.js"
+  },
+  "jshintConfig": {
+    "esversion": "6"
   },
   "repository": {
     "type": "git",
@@ -16,5 +21,12 @@
   "bugs": {
     "url": "https://github.com/Bael/fcc.backend.timestamp/issues"
   },
-  "homepage": "https://github.com/Bael/fcc.backend.timestamp#readme"
+  "homepage": "https://github.com/Bael/fcc.backend.timestamp#readme",
+  "devDependencies": {
+    "expect": "^1.20.2",
+    "mocha": "^3.4.2"
+  },
+  "dependencies": {
+    "moment": "^2.18.1"
+  }
 }

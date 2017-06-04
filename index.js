@@ -1,58 +1,46 @@
 const http = require('http');
 const url = require('url');
+const dateparser = require('./dateparser');
+const port = process.env.PORT || 8000;
 
-function parseStringToDate(path) {
-	let unix = "";
-	let natural = "";
-	try {
-		if (path.length > 0) {
-			
-			let millisec = parseInt(path);
-			
-			if (isNaN(millisec) || millisec.toString() != path) // number + string - proceeds parsing
-			{
-				millisec = Date.parse(decodeURIComponent(path)); 
-			} 
-
-			if (millisec > 0) {
-				var date = new Date();
-				date.setTime(millisec);
-				console.log(date);
-				unix = date.getTime();
-				natural = date.toLocaleString();
-			}
-		};
-
-
-	} catch (e) {
-		console.log("wrong date" + path);
-	}
-
-	return {unix, natural};
-
-
-}
 
 const server = http.createServer(function(req, res) {
 	
 	var url_parts = url.parse(req.url, true);
 	var query = url_parts.query;
 
-	res.writeHead(200, { 'Content-Type': 'text/plain' });
+	
 
 	let path = url_parts.path.substr(1) || "";
 
-	let obj = parseStringToDate(path);
+	if (path === "") {
+		const fs = require('fs');
+		fs.readFile(__dirname + '/help.html', 
+				function(err, data) { 
+					if (err) {
 
-	res.write(JSON.stringify(obj));
-	res.write("\r\n");
+						res.statusCode = 500;
+						res.end(String(err));
+					} else {
+						res.writeHead(200, { 'Content-Type': 'text/html' });
+						
+						res.write(data);
+						res.end();
+					}});
 
-	//res.write('Hello, world.\r\n');
-	res.end();
+		
+		
+	}
+	else {
+		res.writeHead(200, { 'Content-Type': 'text/plain' });
+		let obj = dateparser.parseDate(decodeURIComponent(path));
+		res.write(JSON.stringify(obj));
+		res.end();
+	}
 
 });
 
-server.listen(8000, function() {
-	console.log("connected to the port "+8000);
+server.listen(port, function() {
+	console.log("connected to the port " + port);
 });
 
