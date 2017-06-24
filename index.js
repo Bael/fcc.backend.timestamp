@@ -3,8 +3,9 @@ const url = require('url');
 const dateparser = require('./dateparser');
 const port = process.env.PORT || 8000;
 
-
 const server = http.createServer(function(req, res) {
+
+	console.log(JSON.stringify(req.params));
 	
 	var url_parts = url.parse(req.url, true);
 	var query = url_parts.query;
